@@ -73,8 +73,8 @@ class WebSecurityConfig {
 
     internal class JwtGrantedAuthoritiesConverter : Converter<Jwt, Collection<GrantedAuthority>> {
         override fun convert(jwt: Jwt): Collection<GrantedAuthority> {
-            val claimRealm: Any? = JsonPath.read(jwt.claims, "$.realm_access.roles") // odchycení PathNotFoundException
-            // val claimResource: Any? = JsonPath.read(jwt.claims, "$.resource_access.roles") // doplnit pro resources
+            // This method can be simplified.
+            val claimRealm: Any? = JsonPath.read(jwt.claims, "$.realm_access.roles") // PathNotFoundException should be caught
 
             val roles: List<String> = when (claimRealm) {
                 is String -> claimRealm.split(",")
@@ -85,7 +85,7 @@ class WebSecurityConfig {
                         emptyList()
                     }
                 }
-
+                // Complex checking if inside is another collection. Can be simplified.
                 is MutableCollection<*> -> {
                     val iter = claimRealm.iterator()
                     if (!iter.hasNext()) {
