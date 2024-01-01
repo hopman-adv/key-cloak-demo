@@ -1,0 +1,14 @@
+### server port
+server:
+  port: 8081
+
+spring:
+  application:
+    name: Spring 3 and Keycloak
+
+## keycloak via oidc-starter
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/MyRealm
