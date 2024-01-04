@@ -52,7 +52,7 @@ class WebSecurityConfig {
 
             authorizeHttpRequests {
                 authorize("/actuator/health/readiness", permitAll)
-                authorize("/actuator/health/liveness", "/v3/api-docs/**", permitAll)
+                authorize("/actuator/health/liveness", permitAll)
                 authorize("/v3/api-docs/**", permitAll)
                 authorize("/public", permitAll)
                 authorize("/api/**", authenticated)
@@ -100,7 +100,7 @@ class WebSecurityConfig {
                     }
                 }
 
-                else -> emptyList()
+                else -> emptyList() // změnit na příslušnou Exception
             }
             println(roles)
             return roles
